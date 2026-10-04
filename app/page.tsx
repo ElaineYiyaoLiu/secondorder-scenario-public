@@ -53,7 +53,7 @@ export default function Home(){
  useEffect(()=>{
   let restored:Workspace|null=null;
   try{const hash=window.location.hash;if(hash.startsWith('#analysis=')){restored=decodeWorkspace(decodeURIComponent(hash.slice(10)));if(!restored)setNotice('invalid');}else if(hash.startsWith('#scenario=')){const old=decodeScenario(hash);if(old){const s:Scenario={id:'imported',name:old.question.slice(0,100)||'Imported scenario',question:old.question,params:old.params,feedback:true,updated:'',model:MODEL_VERSION};restored={...initial,lang:old.lang,scenarios:[...initial.scenarios,s],active:s.id,compared:[s.id]};}else setNotice('invalid');}else{const raw=localStorage.getItem(STORAGE_KEY);if(raw){restored=decodeWorkspace(raw);if(!restored)setNotice('invalid');}}}catch{setNotice('invalid');}
-  if(restored){if(window.location.hash.startsWith('#analysis=')||window.location.hash.startsWith('#scenario='))setScreen('analysis');setW(restored);const s=restored.scenarios.find(s=>s.id===restored.active)!;loadDraft(s);}setReady(true);
+  if(restored){if(window.location.hash.startsWith('#analysis=')||window.location.hash.startsWith('#scenario='))setScreen('analysis');setW({...restored,lang:'en'});const s=restored.scenarios.find(s=>s.id===restored.active)!;loadDraft(s);}setReady(true);
  },[]);
  useEffect(()=>{if(!ready)return;try{localStorage.setItem(STORAGE_KEY,JSON.stringify(w));setStorageOk(true);}catch{setStorageOk(false);}document.documentElement.lang=lang==='zh'?'zh-CN':'en';},[w,ready,lang]);
  useEffect(()=>{
