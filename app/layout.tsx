@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './style.css';
 
 export const metadata: Metadata = {
-  title: 'SecondOrder Scenario',
+  title: 'SecondOrder Scenario · under construction',
   description: 'Interactive scenario analysis for exploring second-order effects across technology, labor, demand, and distribution.'
 };
 
