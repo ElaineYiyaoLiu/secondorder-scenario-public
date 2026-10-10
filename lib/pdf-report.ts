@@ -28,9 +28,9 @@ export async function downloadPdfReport(body: string, lang: 'en' | 'zh') {
    if(content!.scrollHeight>999&&content!.children.length>1){block.remove();const heading=content!.lastElementChild?.tagName==='H3'?content!.lastElementChild:null;heading?.remove();newPage();if(heading)content!.appendChild(heading);content!.appendChild(block);}
   }
   const pdf=new jsPDF({orientation:'portrait',unit:'mm',format:'a4',compress:true});
-  pdf.setProperties({title:'SecondOrder Scenario Analysis Report',subject:'Saved scenario analysis',creator:'SecondOrder Scenario V0.2'});
+  pdf.setProperties({title:'SecondOrder Scenario Analysis Report',subject:'Saved scenario analysis',creator:'SecondOrder Scenario V0.5'});
   for(let i=0;i<pages.length;i++){
-   const footer=doc.createElement('div');footer.className='footer';footer.innerHTML=`<span>SecondOrder Scenario / V0.2</span><span>${i+1} / ${pages.length}</span>`;pages[i].appendChild(footer);
+   const footer=doc.createElement('div');footer.className='footer';footer.innerHTML=`<span>SecondOrder Scenario / V0.5</span><span>${i+1} / ${pages.length}</span>`;pages[i].appendChild(footer);
    const canvas=await html2canvas(pages[i],{scale:2,backgroundColor:'#ffffff',logging:false,scrollX:0,scrollY:0,windowWidth:794,windowHeight:1123});
    if(i)pdf.addPage();pdf.addImage(canvas.toDataURL('image/jpeg',.95),'JPEG',0,0,210,297,undefined,'FAST');
    canvas.width=0;canvas.height=0;
